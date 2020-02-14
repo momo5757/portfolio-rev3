@@ -43,6 +43,12 @@ if ('serviceWorker' in navigator) {
       console.log('SW registration failed: ', err);
     });
   });
+  navigator.serviceWorker.addEventListener('message', function (e) {
+    if (e.data && e.data.type == 'CACHE_UPDATED') {
+      window.location.reload();
+      console.log('Page updated: ', e.data.payload.updatedURL);
+    }
+  });
 }
 </script>
 </body>
